@@ -1,0 +1,67 @@
+package controleur;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+/**
+* Servlet implementation class Login
+*/
+@WebServlet("/Login")
+public class Login extends HttpServlet {
+
+private static final long serialVersionUID = 1L;
+ 
+ /**
+ * @see HttpServlet#HttpServlet()
+ */
+ public Login() {
+ super();
+ } 
+/**
+ * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+ */
+protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+throws ServletException, IOException {
+ } 
+/**
+ * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse 
+response)
+ */
+protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+throws ServletException, IOException {
+// Récupérer paramètres 
+ String Un = request.getParameter("UserName");
+ String Pw = request.getParameter("PassWord");
+// Traiter paramètres
+ boolean resulta = false; 
+ if (Un.trim().length()>0 && Pw.trim().length()>0){
+ resulta = true;
+ } 
+// Générer page réponse
+ response.setContentType("text/html;charset=UTF-8");
+ PrintWriter out = response.getWriter();
+ try { 
+ out.println("<!DOCTYPE html>");
+ out.println("<html><head>");
+ out.println("<meta http-equiv='Content-Type' content='text/html; 
+charset=UTF-8'>");
+ out.println("<title>ServletRequest </title></head>");
+ out.println("<body>");
+ out.println("<h1>Page résultat </h1>"); 
+ if (resulta){
+ out.println("<p>Vous êtes connecté avec le compte " + "</p>");
+ out.println("<p>Nom d'utilisateur : " + Un + "</p>");
+ out.println("<p>Mot de passe : " + Pw + "</p>");
+ } else {
+ out.println("<p>Vous n'êtes pas connecté " + "</p>");
+ } 
+ out.println("</body>");
+ out.println("</html>");
+ } finally {
+ out.close();
+ } 
+ } 
+}
